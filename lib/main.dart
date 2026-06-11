@@ -121,25 +121,25 @@ List<LoanData> dummyLoans = [
   LoanData(
     id: 'INV-092', itemName: 'Proyektor Epson EB-X51', userName: 'Ahmad Rizal', nim: '60200119032',
     matkul: 'Pemrograman Web', dosen: 'Dr. Syamsuddin, M.T.',
-    imageUrl: ('assets/Funnycat.jpg'),
+    imageUrl: 'assets/Funnycat.jpg',
     date: '24 Okt 2023', time: '08:00 - 12:00 WITA', status: 'Menunggu',
   ),
   LoanData(
     id: 'INV-114', itemName: 'Kamera Canon EOS 90D', userName: 'Siti Aminah', nim: '60200120045',
     matkul: 'Fotografi Jurnalistik', dosen: 'M. Hasrul H, S.Kom, M.Kom',
-    imageUrl: ('assets/Funnycat.jpg'),
+    imageUrl: 'assets/Funnycat.jpg',
     date: '25 Okt 2023', time: '10:00 - 14:00 WITA', status: 'Menunggu',
   ),
   LoanData(
     id: 'INV-045', itemName: 'MacBook Air M1', userName: 'Siti Nurhaliza', nim: '60200120045',
     matkul: 'Desain Grafis', dosen: 'Ahmad Anshari, M.Kom',
-    imageUrl: ('assets/Funnycat.jpg'),
+    imageUrl: 'assets/Funnycat.jpg',
     date: '26 Okt 2023', time: '13:00 - 15:00 WITA', status: 'Terlambat',
   ),
   LoanData(
     id: 'INV-012', itemName: 'Kamera Sony A7III', userName: 'Budi Santoso', nim: '60200118012',
     matkul: 'Multimedia', dosen: 'Nur Aeni, S.Si., M.Pd.',
-    imageUrl: ('assets/Funnycat.jpg'),
+    imageUrl: 'assets/Funnycat.jpg',
     date: '27 Okt 2023', time: '10:00 - 16:00 WITA', status: 'Aktif',
   ),
 ];
@@ -194,9 +194,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   boxShadow: [
-                    BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 10),
+                    BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10),
                   ],
-                  // Menghapus const dari DecorationImage agar kompatibel dengan semua versi
                   image: const DecorationImage(
                     image: AssetImage('assets/profilUIN.png'),
                     fit: BoxFit.contain,
@@ -252,9 +251,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Row(
+                  child: Row( 
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text("Login", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                       SizedBox(width: 8),
                       Icon(Icons.arrow_forward),
@@ -334,7 +333,7 @@ class _MainScreenState extends State<MainScreen> {
       body: pages[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -5))],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -5))],
         ),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
@@ -366,11 +365,11 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   String _selectedFilter = 'Semua';
   
-final List<EquipmentItem> _items = [
-    EquipmentItem(id: '1', name: 'Proyektor Epson', category: 'Proyektor', location: 'Fakultas Sains dan Teknologi', imageUrl: 'assets/Funnycat.jpg'), // <-- Sudah diganti
-    EquipmentItem(id: '2', name: 'Kamera Sony A7', category: 'Alat Lab', location: 'Humas Rektorat', imageUrl: 'assets/Funnycat.jpg', isBorrowed: true), // <-- Sudah diganti
-    EquipmentItem(id: '3', name: 'Kursi Rapat', category: 'Umum', location: 'Gedung Rektorat Lt. 2', imageUrl: 'assets/Funnycat.jpg'), // <-- Sudah diganti
-    EquipmentItem(id: '4', name: 'Spidol & Penghapus', category: 'Alat Tulis', location: 'Fakultas Sains dan Teknologi', imageUrl: 'assets/Funnycat.jpg'), // <-- Sudah diganti
+  final List<EquipmentItem> _items = [
+    EquipmentItem(id: '1', name: 'Proyektor Epson', category: 'Proyektor', location: 'Fakultas Sains dan Teknologi', imageUrl: 'assets/Funnycat.jpg'),
+    EquipmentItem(id: '2', name: 'Kamera Sony A7', category: 'Alat Lab', location: 'Humas Rektorat', imageUrl: 'assets/Funnycat.jpg', isBorrowed: true),
+    EquipmentItem(id: '3', name: 'Kursi Rapat', category: 'Umum', location: 'Gedung Rektorat Lt. 2', imageUrl: 'assets/Funnycat.jpg'),
+    EquipmentItem(id: '4', name: 'Spidol & Penghapus', category: 'Alat Tulis', location: 'Fakultas Sains dan Teknologi', imageUrl: 'assets/Funnycat.jpg'),
   ];
 
   void _showBorrowSheet(EquipmentItem item) {
@@ -635,13 +634,39 @@ final List<EquipmentItem> _items = [
                         child: Text(item.isBorrowed ? "Tidak Tersedia" : "Pinjam", style: const TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    )
+                    
+                    if (item.isBorrowed) ...[
+                      const SizedBox(width: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.info_outline, color: Colors.grey),
+                          onPressed: () {
+                            LoanData activeLoan;
+                            try {
+                              activeLoan = dummyLoans.firstWhere(
+                                (l) => (l.itemName.contains(item.name) || item.name.contains(l.itemName)) && (l.status == 'Aktif' || l.status == 'Terlambat'),
+                              );
+                            } catch (e) {
+                              activeLoan = dummyLoans.firstWhere((l) => l.status == 'Aktif' || l.status == 'Terlambat', orElse: () => dummyLoans.first);
+                            }
+
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => LoanDetailSheet(
+                                loan: activeLoan,
+                                isAdmin: false,
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ]
                   ],
                 )
               ],
@@ -688,13 +713,12 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
               ),
               child: Column(
                 children: [
-                  const CircleAvatar(
+                  const CircleAvatar( 
                     radius: 50,
-                    // Menghapus const dari NetworkImage
                     backgroundImage: AssetImage('assets/Funnycat.jpg'), //foto profil
                   ),
                   const SizedBox(height: 16),
@@ -705,9 +729,9 @@ class ProfileScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(color: getSurfaceColor(context), borderRadius: BorderRadius.circular(20)),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
+                      children: const [
                         Icon(Icons.school, size: 16, color: Colors.grey),
                         SizedBox(width: 8),
                         Text("FAKULTAS SAINS DAN TEKNOLOGI", style: TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w600)),
@@ -870,12 +894,9 @@ class _BorrowFormState extends State<BorrowForm> {
   ];
 
   void _showError(String message) {
-    // Mengubah notifikasi agar muncul DI DALAM form, bukan sebagai Snackbar di luar
     setState(() {
       _errorMessage = message;
     });
-    
-    // Hilangkan peringatan setelah 3 detik otomatis
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
         setState(() {
@@ -1022,13 +1043,13 @@ class _BorrowFormState extends State<BorrowForm> {
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 24),
-                  const SizedBox(width: 12),
+                children: const [
+                  Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 24),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text("Perhatian Limit Waktu", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orange)),
                         SizedBox(height: 4),
                         Text("Batas waktu peminjaman alat untuk sesi ini adalah 35 menit. Keterlambatan akan dicatat dalam sistem.", style: TextStyle(fontSize: 12, color: Colors.black87)),
@@ -1044,7 +1065,7 @@ class _BorrowFormState extends State<BorrowForm> {
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
-                onPressed: _validateAndSubmit, // Fungsi Validasi Dipanggil
+                onPressed: _validateAndSubmit, 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryGreen,
                   foregroundColor: Colors.white,
@@ -1114,12 +1135,11 @@ class _BorrowFormState extends State<BorrowForm> {
       },
       displayStringForOption: (CourseData option) => option.name,
       onSelected: (CourseData selection) {
-        // Otomatis Mengisi Dosen dan Waktu ketika Matkul Dipilih
         _dosenController.text = selection.lecturer;
         _waktuController.text = selection.schedule;
       },
       fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
-        _matkulController = textEditingController; // Bind ke Controller utama
+        _matkulController = textEditingController; 
         return TextField(
           controller: textEditingController,
           focusNode: focusNode,
@@ -1155,7 +1175,7 @@ class _BorrowFormState extends State<BorrowForm> {
             color: getCardColor(context),
             child: SizedBox(
               height: 250.0,
-              width: MediaQuery.of(context).size.width - 48, // Menyesuaikan lebar input
+              width: MediaQuery.of(context).size.width - 48,
               child: ListView.builder(
                 padding: const EdgeInsets.all(8.0),
                 itemCount: options.length,
@@ -1226,7 +1246,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       value: currentMode == ThemeMode.dark,
                       activeColor: primaryGreen,
                       onChanged: (val) {
-                        // SET THEME GLOBALLY
                         themeNotifier.value = val ? ThemeMode.dark : ThemeMode.light;
                       },
                     ),
@@ -1315,7 +1334,7 @@ class AboutUsScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: getCardColor(context),
             borderRadius: BorderRadius.circular(24),
-            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 20)],
+            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20)],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -1594,7 +1613,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
       body: pages[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -5))],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -5))],
         ),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
@@ -1881,7 +1900,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => LoanDetailSheet(loan: loan, isAdmin: isAdmin),
+      builder: (context) => LoanDetailSheet(
+        loan: loan, 
+        isAdmin: isAdmin,
+        onAction: (action) {
+          if (action == 'Setujui') {
+            setState(() => loan.status = 'Aktif');
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman disetujui")));
+          } else if (action == 'Tolak') {
+            setState(() => dummyLoans.remove(loan));
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman ditolak")));
+          }
+        },
+      ),
     );
   }
 }
@@ -2063,11 +2094,23 @@ class _LoansScreenState extends State<LoansScreen> {
                       context: context,
                       isScrollControlled: true,
                       backgroundColor: Colors.transparent,
-                      builder: (context) => LoanDetailSheet(loan: loan, isAdmin: widget.isAdmin),
+                      builder: (context) => LoanDetailSheet(
+                        loan: loan, 
+                        isAdmin: widget.isAdmin,
+                        onAction: (action) {
+                          if (action == 'Setujui') {
+                            setState(() => loan.status = 'Aktif');
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman disetujui")));
+                          } else if (action == 'Tolak') {
+                            setState(() => dummyLoans.remove(loan));
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman ditolak")));
+                          }
+                        }
+                      ),
                     );
                   },
-                  child: const Row(
-                    children: [
+                  child: Row(
+                    children: const [
                       Text("Info", style: TextStyle(fontWeight: FontWeight.bold, color: primaryGreen)),
                       Icon(Icons.arrow_forward, size: 16, color: primaryGreen),
                     ],
@@ -2085,8 +2128,9 @@ class _LoansScreenState extends State<LoansScreen> {
 class LoanDetailSheet extends StatelessWidget {
   final LoanData loan;
   final bool isAdmin;
+  final Function(String)? onAction;
   
-  const LoanDetailSheet({super.key, required this.loan, required this.isAdmin});
+  const LoanDetailSheet({super.key, required this.loan, required this.isAdmin, this.onAction});
 
   @override
   Widget build(BuildContext context) {
@@ -2176,7 +2220,10 @@ class LoanDetailSheet extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        if (onAction != null) onAction!('Tolak');
+                      },
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.brown.shade700,
                         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -2189,7 +2236,10 @@ class LoanDetailSheet extends StatelessWidget {
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        if (onAction != null) onAction!('Setujui');
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryGreen,
                         foregroundColor: Colors.white,
@@ -2212,7 +2262,7 @@ class LoanDetailSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Row(
-        children: [
+        children: [ 
           const Icon(Icons.description_outlined, size: 16, color: primaryGreen),
           const SizedBox(width: 8),
           Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: primaryGreen, letterSpacing: 1.1)),
