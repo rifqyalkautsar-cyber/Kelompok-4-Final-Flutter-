@@ -9,14 +9,24 @@ final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
 // --- TEMA APLIKASI ---
 const Color primaryGreen = Color(0xFF045415); // Warna Hijau Gelap UIN
-const Color backgroundLight = Color(0xFFF3F7F3); // Warna latar terang (krem kehijauan)
+const Color backgroundLight = Color(
+  0xFFF3F7F3,
+); // Warna latar terang (krem kehijauan)
 const Color textPrimary = Color(0xFF1E1E1E);
 
 // --- HELPER WARNA UNTUK DARK MODE ---
-Color getCardColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? const Color(0xFF1E1E1E) : Colors.white;
-Color getTextColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? Colors.white : textPrimary;
-Color getSurfaceColor(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? const Color(0xFF2C2C2C) : backgroundLight;
-
+Color getCardColor(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark
+    ? const Color(0xFF1E1E1E)
+    : Colors.white;
+Color getTextColor(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark
+    ? Colors.white
+    : textPrimary;
+Color getSurfaceColor(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark
+    ? const Color(0xFF2C2C2C)
+    : backgroundLight;
 
 // ============================================================================
 // 📂 FILE: main.dart
@@ -41,7 +51,7 @@ class SmartBorrowApp extends StatelessWidget {
             useMaterial3: true,
             colorSchemeSeed: primaryGreen,
             scaffoldBackgroundColor: backgroundLight,
-            fontFamily: 'Poppins', 
+            fontFamily: 'Poppins',
             appBarTheme: const AppBarTheme(
               backgroundColor: primaryGreen,
               foregroundColor: Colors.white,
@@ -62,7 +72,7 @@ class SmartBorrowApp extends StatelessWidget {
           ),
           home: const LoginScreen(),
         );
-      }
+      },
     );
   }
 }
@@ -119,31 +129,54 @@ class LoanData {
 
 List<LoanData> dummyLoans = [
   LoanData(
-    id: 'INV-092', itemName: 'Proyektor Epson EB-X51', userName: 'Ahmad Rizal', nim: '60200119032',
-    matkul: 'Pemrograman Web', dosen: 'Dr. Syamsuddin, M.T.',
+    id: 'INV-092',
+    itemName: 'Proyektor Epson EB-X51',
+    userName: 'Ahmad Rizal',
+    nim: '60200119032',
+    matkul: 'Pemrograman Web',
+    dosen: 'Dr. Syamsuddin, M.T.',
     imageUrl: 'assets/Funnycat.jpg',
-    date: '24 Okt 2023', time: '08:00 - 12:00 WITA', status: 'Menunggu',
+    date: '24 Okt 2023',
+    time: '08:00 - 12:00 WITA',
+    status: 'Menunggu',
   ),
   LoanData(
-    id: 'INV-114', itemName: 'Kamera Canon EOS 90D', userName: 'Siti Aminah', nim: '60200120045',
-    matkul: 'Fotografi Jurnalistik', dosen: 'M. Hasrul H, S.Kom, M.Kom',
+    id: 'INV-114',
+    itemName: 'Kamera Canon EOS 90D',
+    userName: 'Siti Aminah',
+    nim: '60200120045',
+    matkul: 'Fotografi Jurnalistik',
+    dosen: 'M. Hasrul H, S.Kom, M.Kom',
     imageUrl: 'assets/Funnycat.jpg',
-    date: '25 Okt 2023', time: '10:00 - 14:00 WITA', status: 'Menunggu',
+    date: '25 Okt 2023',
+    time: '10:00 - 14:00 WITA',
+    status: 'Menunggu',
   ),
   LoanData(
-    id: 'INV-045', itemName: 'MacBook Air M1', userName: 'Siti Nurhaliza', nim: '60200120045',
-    matkul: 'Desain Grafis', dosen: 'Ahmad Anshari, M.Kom',
+    id: 'INV-045',
+    itemName: 'MacBook Air M1',
+    userName: 'Siti Nurhaliza',
+    nim: '60200120045',
+    matkul: 'Desain Grafis',
+    dosen: 'Ahmad Anshari, M.Kom',
     imageUrl: 'assets/Funnycat.jpg',
-    date: '26 Okt 2023', time: '13:00 - 15:00 WITA', status: 'Terlambat',
+    date: '26 Okt 2023',
+    time: '13:00 - 15:00 WITA',
+    status: 'Terlambat',
   ),
   LoanData(
-    id: 'INV-012', itemName: 'Kamera Sony A7III', userName: 'Budi Santoso', nim: '60200118012',
-    matkul: 'Multimedia', dosen: 'Nur Aeni, S.Si., M.Pd.',
+    id: 'INV-012',
+    itemName: 'Kamera Sony A7III',
+    userName: 'Budi Santoso',
+    nim: '60200118012',
+    matkul: 'Multimedia',
+    dosen: 'Nur Aeni, S.Si., M.Pd.',
     imageUrl: 'assets/Funnycat.jpg',
-    date: '27 Okt 2023', time: '10:00 - 16:00 WITA', status: 'Aktif',
+    date: '27 Okt 2023',
+    time: '10:00 - 16:00 WITA',
+    status: 'Aktif',
   ),
 ];
-
 
 // ============================================================================
 // 📂 FILE: login_screen.dart
@@ -164,15 +197,27 @@ class _LoginScreenState extends State<LoginScreen> {
     String username = _usernameController.text;
     if (username.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Masukkan NIM atau Username", style: TextStyle(color: Colors.white)), backgroundColor: Colors.red),
+        const SnackBar(
+          content: Text(
+            "Masukkan NIM atau Username",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
       );
       return;
     }
-    
+
     if (username.toLowerCase() == 'admin') {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AdminMainScreen()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const AdminMainScreen()),
+      );
     } else {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainScreen()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainScreen()),
+      );
     }
   }
 
@@ -194,7 +239,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   boxShadow: [
-                    BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10),
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                    ),
                   ],
                   image: const DecorationImage(
                     image: AssetImage('assets/profilUIN.png'),
@@ -205,7 +253,11 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 24),
               const Text(
                 "SmartBorrow",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: primaryGreen),
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: primaryGreen,
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -214,33 +266,47 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
               const SizedBox(height: 40),
-              
+
               _buildInputLabel(context, "Username / NIM"),
               TextField(
                 controller: _usernameController,
-                decoration: _buildInputDecoration(context, "Masukkan NIM atau username", Icons.person_outline),
+                decoration: _buildInputDecoration(
+                  context,
+                  "Masukkan NIM atau username",
+                  Icons.person_outline,
+                ),
                 style: TextStyle(color: getTextColor(context)),
               ),
               const SizedBox(height: 20),
-              
+
               _buildInputLabel(context, "Password"),
               TextField(
                 controller: _passwordController,
                 obscureText: _obscureText,
                 style: TextStyle(color: getTextColor(context)),
-                decoration: _buildInputDecoration(context, "Masukkan password", Icons.lock_outline).copyWith(
-                  suffixIcon: IconButton(
-                    icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility, color: Colors.grey),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                  ),
-                ),
+                decoration:
+                    _buildInputDecoration(
+                      context,
+                      "Masukkan password",
+                      Icons.lock_outline,
+                    ).copyWith(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
+                    ),
               ),
               const SizedBox(height: 40),
-              
+
               SizedBox(
                 width: double.infinity,
                 height: 55,
@@ -249,12 +315,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryGreen,
                     foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  child: Row( 
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text("Login", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       SizedBox(width: 8),
                       Icon(Icons.arrow_forward),
                     ],
@@ -273,12 +347,22 @@ class _LoginScreenState extends State<LoginScreen> {
       padding: const EdgeInsets.only(bottom: 8.0, left: 4.0),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(label, style: TextStyle(fontWeight: FontWeight.w600, color: getTextColor(context))),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: getTextColor(context),
+          ),
+        ),
       ),
     );
   }
 
-  InputDecoration _buildInputDecoration(BuildContext context, String hint, IconData icon) {
+  InputDecoration _buildInputDecoration(
+    BuildContext context,
+    String hint,
+    IconData icon,
+  ) {
     return InputDecoration(
       hintText: hint,
       hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
@@ -292,7 +376,11 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300),
+        borderSide: BorderSide(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade800
+              : Colors.grey.shade300,
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
@@ -333,7 +421,13 @@ class _MainScreenState extends State<MainScreen> {
       body: pages[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -5))],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
         ),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
@@ -343,9 +437,21 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: getCardColor(context),
           type: BottomNavigationBarType.fixed,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.inventory_2_outlined), activeIcon: Icon(Icons.inventory_2), label: 'Inventory'),
-            BottomNavigationBarItem(icon: Icon(Icons.history_outlined), activeIcon: Icon(Icons.history), label: 'My Loans'),
-            BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: 'Profil'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.inventory_2_outlined),
+              activeIcon: Icon(Icons.inventory_2),
+              label: 'Inventory',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history_outlined),
+              activeIcon: Icon(Icons.history),
+              label: 'My Loans',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
+              label: 'Profil',
+            ),
           ],
         ),
       ),
@@ -355,7 +461,7 @@ class _MainScreenState extends State<MainScreen> {
 
 class DashboardScreen extends StatefulWidget {
   final VoidCallback onNavigateToLoans;
-  
+
   const DashboardScreen({super.key, required this.onNavigateToLoans});
 
   @override
@@ -364,12 +470,40 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   String _selectedFilter = 'Semua';
-  
+  String _searchQuery = ''; // <-- Tambahan state untuk menyimpan teks pencarian
+  bool _isSearching =
+      false; // <-- Tambahan state untuk toggle tampilan search bar
+
   final List<EquipmentItem> _items = [
-    EquipmentItem(id: '1', name: 'Proyektor Epson', category: 'Proyektor', location: 'Fakultas Sains dan Teknologi', imageUrl: 'assets/Funnycat.jpg'),
-    EquipmentItem(id: '2', name: 'Kamera Sony A7', category: 'Alat Lab', location: 'Humas Rektorat', imageUrl: 'assets/Funnycat.jpg', isBorrowed: true),
-    EquipmentItem(id: '3', name: 'Kursi Rapat', category: 'Umum', location: 'Gedung Rektorat Lt. 2', imageUrl: 'assets/Funnycat.jpg'),
-    EquipmentItem(id: '4', name: 'Spidol & Penghapus', category: 'Alat Tulis', location: 'Fakultas Sains dan Teknologi', imageUrl: 'assets/Funnycat.jpg'),
+    EquipmentItem(
+      id: '1',
+      name: 'Proyektor Epson',
+      category: 'Proyektor',
+      location: 'Fakultas Sains dan Teknologi',
+      imageUrl: 'assets/Funnycat.jpg',
+    ),
+    EquipmentItem(
+      id: '2',
+      name: 'Kamera Sony A7',
+      category: 'Alat Lab',
+      location: 'Humas Rektorat',
+      imageUrl: 'assets/Funnycat.jpg',
+      isBorrowed: true,
+    ),
+    EquipmentItem(
+      id: '3',
+      name: 'Kursi Rapat',
+      category: 'Umum',
+      location: 'Gedung Rektorat Lt. 2',
+      imageUrl: 'assets/Funnycat.jpg',
+    ),
+    EquipmentItem(
+      id: '4',
+      name: 'Spidol & Penghapus',
+      category: 'Alat Tulis',
+      location: 'Fakultas Sains dan Teknologi',
+      imageUrl: 'assets/Funnycat.jpg',
+    ),
   ];
 
   void _showBorrowSheet(EquipmentItem item) {
@@ -380,8 +514,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       builder: (context) => BorrowForm(
         itemName: item.name,
         onConfirm: () {
-          Navigator.pop(context); 
-          _showSuccessScreen(item.name); 
+          Navigator.pop(context);
+          _showSuccessScreen(item.name);
         },
       ),
     );
@@ -400,11 +534,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(color: primaryGreen, shape: BoxShape.circle),
+              decoration: const BoxDecoration(
+                color: primaryGreen,
+                shape: BoxShape.circle,
+              ),
               child: const Icon(Icons.check, color: Colors.white, size: 40),
             ),
             const SizedBox(height: 24),
-            const Text("Berhasil!", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: primaryGreen)),
+            const Text(
+              "Berhasil!",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: primaryGreen,
+              ),
+            ),
             const SizedBox(height: 16),
             const Text(
               "Pinjaman sudah diajukan. Harap kembalikan sesuai tepat waktu.",
@@ -422,14 +566,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context); 
-                  setState(() {}); 
+                  Navigator.pop(context);
+                  setState(() {});
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryGreen,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 child: const Text("Kembali ke Beranda"),
               ),
@@ -439,8 +585,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Navigator.pop(context); // Tutup dialog
                 widget.onNavigateToLoans(); // BERPINDAH KE TAB MY LOANS
               },
-              child: const Text("Lihat Detail Peminjaman", style: TextStyle(color: primaryGreen)),
-            )
+              child: const Text(
+                "Lihat Detail Peminjaman",
+                style: TextStyle(color: primaryGreen),
+              ),
+            ),
           ],
         ),
       ),
@@ -449,35 +598,89 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<EquipmentItem> filteredItems = _selectedFilter == 'Semua' 
-        ? _items 
-        : _items.where((e) => e.category == _selectedFilter).toList();
+    // Logika filter digabung (Kategori + Teks Pencarian)
+    List<EquipmentItem> filteredItems = _items.where((e) {
+      bool matchesCategory =
+          _selectedFilter == 'Semua' || e.category == _selectedFilter;
+      bool matchesSearch = e.name.toLowerCase().contains(
+        _searchQuery.toLowerCase(),
+      );
+      return matchesCategory && matchesSearch;
+    }).toList();
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Row(
-          children: [
-            Container(
-              width: 30, height: 30,
-              decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-              child: const Icon(Icons.account_balance, color: primaryGreen, size: 18),
-            ),
-            const SizedBox(width: 12),
-            const Text("SmartBorrow", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-          ],
-        ),
+        title: _isSearching
+            ? TextField(
+                autofocus: true,
+                style: const TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
+                decoration: const InputDecoration(
+                  hintText: "Cari alat (ex: Proyektor)...",
+                  hintStyle: TextStyle(color: Colors.white70),
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _searchQuery = value;
+                  });
+                },
+              )
+            : Row(
+                children: [
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: const Icon(
+                      Icons.account_balance,
+                      color: primaryGreen,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Text(
+                    "SmartBorrow",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ],
+              ),
         actions: [
-          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
           IconButton(
-            icon: const Icon(Icons.settings), 
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
+            icon: Icon(_isSearching ? Icons.close : Icons.search),
+            onPressed: () {
+              setState(() {
+                _isSearching = !_isSearching;
+                if (!_isSearching) {
+                  _searchQuery = ''; // Reset pencarian jika dibatalkan/ditutup
+                }
+              });
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
+            ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showBorrowSheet(EquipmentItem(id: '0', name: 'Alat Tambahan Manual', category: 'Umum', location: '', imageUrl: ''));
+          _showBorrowSheet(
+            EquipmentItem(
+              id: '0',
+              name: 'Alat Tambahan Manual',
+              category: 'Umum',
+              location: '',
+              imageUrl: '',
+            ),
+          );
         },
         backgroundColor: primaryGreen,
         child: const Icon(Icons.add, color: Colors.white),
@@ -487,45 +690,85 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Halo, Muhammad Rifqy!", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: getTextColor(context))),
-            const Text("Sistem Peminjaman Inventaris UIN Alauddin", style: TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(
+              "Halo, Muhammad Rifqy!",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: getTextColor(context),
+              ),
+            ),
+            const Text(
+              "Sistem Peminjaman Inventaris UIN Alauddin",
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
             const SizedBox(height: 24),
-            
+
             Row(
               children: [
-                _buildStatCard(context, "TERSEDIA", "${_items.where((e) => !e.isBorrowed).length}", Colors.green),
+                _buildStatCard(
+                  context,
+                  "TERSEDIA",
+                  "${_items.where((e) => !e.isBorrowed).length}",
+                  Colors.green,
+                ),
                 const SizedBox(width: 16),
-                _buildStatCard(context, "DIPINJAM", "${_items.where((e) => e.isBorrowed).length}", Colors.red),
+                _buildStatCard(
+                  context,
+                  "DIPINJAM",
+                  "${_items.where((e) => e.isBorrowed).length}",
+                  Colors.red,
+                ),
               ],
             ),
             const SizedBox(height: 24),
-            
+
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: ['Semua', 'Proyektor', 'Alat Tulis', 'Alat Lab', 'Umum'].map((category) {
-                  bool isSelected = _selectedFilter == category;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: ChoiceChip(
-                      label: Text(category),
-                      selected: isSelected,
-                      onSelected: (selected) => setState(() => _selectedFilter = category),
-                      selectedColor: primaryGreen,
-                      backgroundColor: getCardColor(context),
-                      labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.grey.shade700, fontWeight: FontWeight.w600),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: isSelected ? primaryGreen : (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300)),
-                      ),
-                      showCheckmark: false,
-                    ),
-                  );
-                }).toList(),
+                children:
+                    [
+                      'Semua',
+                      'Proyektor',
+                      'Alat Tulis',
+                      'Alat Lab',
+                      'Umum',
+                    ].map((category) {
+                      bool isSelected = _selectedFilter == category;
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: ChoiceChip(
+                          label: Text(category),
+                          selected: isSelected,
+                          onSelected: (selected) =>
+                              setState(() => _selectedFilter = category),
+                          selectedColor: primaryGreen,
+                          backgroundColor: getCardColor(context),
+                          labelStyle: TextStyle(
+                            color: isSelected
+                                ? Colors.white
+                                : Colors.grey.shade700,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: BorderSide(
+                              color: isSelected
+                                  ? primaryGreen
+                                  : (Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey.shade800
+                                        : Colors.grey.shade300),
+                            ),
+                          ),
+                          showCheckmark: false,
+                        ),
+                      );
+                    }).toList(),
               ),
             ),
             const SizedBox(height: 24),
-            
+
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -540,27 +783,57 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildStatCard(BuildContext context, String title, String count, Color dotColor) {
+  Widget _buildStatCard(
+    BuildContext context,
+    String title,
+    String count,
+    Color dotColor,
+  ) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: getCardColor(context),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+          border: Border.all(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade800
+                : Colors.grey.shade200,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Container(width: 8, height: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: dotColor)),
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: dotColor,
+                  ),
+                ),
                 const SizedBox(width: 8),
-                Text(title, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 8),
-            Text(count, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: primaryGreen)),
+            Text(
+              count,
+              style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: primaryGreen,
+              ),
+            ),
           ],
         ),
       ),
@@ -573,7 +846,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
       decoration: BoxDecoration(
         color: getCardColor(context),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade800
+              : Colors.grey.shade200,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -581,22 +858,38 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Stack(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                child: Image.asset(item.imageUrl, height: 160, width: double.infinity, fit: BoxFit.cover),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: Image.asset(
+                  item.imageUrl,
+                  height: 160,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
               Positioned(
-                top: 12, left: 12,
+                top: 12,
+                left: 12,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
-                    color: item.isBorrowed ? Colors.red.shade100 : Colors.green.shade100,
+                    color: item.isBorrowed
+                        ? Colors.red.shade100
+                        : Colors.green.shade100,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    item.isBorrowed ? "Dipinjam" : "Tersedia: 1", 
+                    item.isBorrowed ? "Dipinjam" : "Tersedia: 1",
                     style: TextStyle(
-                      fontSize: 10, fontWeight: FontWeight.bold,
-                      color: item.isBorrowed ? Colors.red.shade800 : Colors.green.shade800,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: item.isBorrowed
+                          ? Colors.red.shade800
+                          : Colors.green.shade800,
                     ),
                   ),
                 ),
@@ -611,47 +904,89 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: Text(item.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: getTextColor(context)))),
+                    Expanded(
+                      child: Text(
+                        item.name,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: getTextColor(context),
+                        ),
+                      ),
+                    ),
                     const Icon(Icons.devices, color: Colors.grey, size: 20),
                   ],
                 ),
                 const SizedBox(height: 4),
-                Text(item.location, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                Text(
+                  item.location,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
                 const SizedBox(height: 16),
-                
+
                 Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: item.isBorrowed ? null : () => _showBorrowSheet(item),
+                        onPressed: item.isBorrowed
+                            ? null
+                            : () => _showBorrowSheet(item),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: item.isBorrowed ? (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300) : primaryGreen,
-                          foregroundColor: item.isBorrowed ? Colors.grey : Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          backgroundColor: item.isBorrowed
+                              ? (Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey.shade800
+                                    : Colors.grey.shade300)
+                              : primaryGreen,
+                          foregroundColor: item.isBorrowed
+                              ? Colors.grey
+                              : Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           elevation: 0,
                         ),
-                        child: Text(item.isBorrowed ? "Tidak Tersedia" : "Pinjam", style: const TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          item.isBorrowed ? "Tidak Tersedia" : "Pinjam",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                    
+
                     if (item.isBorrowed) ...[
                       const SizedBox(width: 8),
                       Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300),
+                          border: Border.all(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade800
+                                : Colors.grey.shade300,
+                          ),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: IconButton(
-                          icon: const Icon(Icons.info_outline, color: Colors.grey),
+                          icon: const Icon(
+                            Icons.info_outline,
+                            color: Colors.grey,
+                          ),
                           onPressed: () {
                             LoanData activeLoan;
                             try {
                               activeLoan = dummyLoans.firstWhere(
-                                (l) => (l.itemName.contains(item.name) || item.name.contains(l.itemName)) && (l.status == 'Aktif' || l.status == 'Terlambat'),
+                                (l) =>
+                                    (l.itemName.contains(item.name) ||
+                                        item.name.contains(l.itemName)) &&
+                                    (l.status == 'Aktif' ||
+                                        l.status == 'Terlambat'),
                               );
                             } catch (e) {
-                              activeLoan = dummyLoans.firstWhere((l) => l.status == 'Aktif' || l.status == 'Terlambat', orElse: () => dummyLoans.first);
+                              activeLoan = dummyLoans.firstWhere(
+                                (l) =>
+                                    l.status == 'Aktif' ||
+                                    l.status == 'Terlambat',
+                                orElse: () => dummyLoans.first,
+                              );
                             }
 
                             showModalBottomSheet(
@@ -665,13 +1000,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             );
                           },
                         ),
-                      )
-                    ]
+                      ),
+                    ],
                   ],
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -685,22 +1020,32 @@ class ProfileScreen extends StatelessWidget {
   final bool isAdmin;
   final VoidCallback onNavigateToLoans;
 
-  const ProfileScreen({super.key, required this.isAdmin, required this.onNavigateToLoans});
+  const ProfileScreen({
+    super.key,
+    required this.isAdmin,
+    required this.onNavigateToLoans,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text("Profil", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Profil",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.transparent,
         foregroundColor: primaryGreen,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings), 
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
-          )
+            icon: const Icon(Icons.settings),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -713,97 +1058,191 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                  ),
+                ],
               ),
               child: Column(
                 children: [
-                  const CircleAvatar( 
+                  const CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/Funnycat.jpg'), //foto profil
+                    backgroundImage: AssetImage(
+                      'assets/Funnycat.jpg',
+                    ), //foto profil
                   ),
                   const SizedBox(height: 16),
-                  Text(isAdmin ? "Admin Jurusan" : "Muhammad Rifqy\nAlkautsar Samudra", textAlign: TextAlign.center, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: getTextColor(context))),
+                  Text(
+                    isAdmin
+                        ? "Admin Jurusan"
+                        : "Muhammad Rifqy\nAlkautsar Samudra",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: getTextColor(context),
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(isAdmin ? "Staf Administrasi" : "60200124135", style: const TextStyle(fontSize: 14, color: primaryGreen, fontWeight: FontWeight.w600)),
+                  Text(
+                    isAdmin ? "Staf Administrasi" : "60200124135",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: primaryGreen,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: 12),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(color: getSurfaceColor(context), borderRadius: BorderRadius.circular(20)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: getSurfaceColor(context),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: const [
                         Icon(Icons.school, size: 16, color: Colors.grey),
                         SizedBox(width: 8),
-                        Text("FAKULTAS SAINS DAN TEKNOLOGI", style: TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w600)),
+                        Text(
+                          "FAKULTAS SAINS DAN TEKNOLOGI",
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            
+
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(16),
-                border: Border(top: BorderSide(color: Colors.orange.shade300, width: 4)),
+                border: Border(
+                  top: BorderSide(color: Colors.orange.shade300, width: 4),
+                ),
               ),
               child: Row(
                 children: [
                   const Icon(Icons.library_books, color: primaryGreen),
                   const SizedBox(width: 12),
-                  const Text("Total Pinjam", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600)),
+                  const Text(
+                    "Total Pinjam",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const Spacer(),
-                  Text(isAdmin ? "26" : "12", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: getTextColor(context))),
+                  Text(
+                    isAdmin ? "26" : "12",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: getTextColor(context),
+                    ),
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            
-            _buildProfileMenu(context, Icons.person_outline, "Edit Foto Profil", () {}),
-            
+
+            _buildProfileMenu(
+              context,
+              Icons.person_outline,
+              "Edit Foto Profil",
+              () {},
+            ),
+
             // TOMBOL RIWAYAT PEMINJAMAN - MEMINDAHKAN KE TAB MY LOANS
             _buildProfileMenu(context, Icons.history, "Riwayat Peminjaman", () {
               onNavigateToLoans();
             }),
-            
-            _buildProfileMenu(context, Icons.settings_outlined, "Pengaturan", () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
-            }),
+
+            _buildProfileMenu(
+              context,
+              Icons.settings_outlined,
+              "Pengaturan",
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 32),
-            
+
             SizedBox(
               width: double.infinity,
               height: 50,
               child: OutlinedButton.icon(
-                onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false),
+                onPressed: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false,
+                ),
                 icon: const Icon(Icons.logout, color: Colors.red),
-                label: const Text("Keluar", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                label: const Text(
+                  "Keluar",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.red),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProfileMenu(BuildContext context, IconData icon, String title, VoidCallback onTap) {
+  Widget _buildProfileMenu(
+    BuildContext context,
+    IconData icon,
+    String title,
+    VoidCallback onTap,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: getCardColor(context),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade800
+              : Colors.grey.shade200,
+        ),
       ),
       child: ListTile(
         leading: Icon(icon, color: primaryGreen),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.w500, color: getTextColor(context))),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: getTextColor(context),
+          ),
+        ),
         trailing: const Icon(Icons.chevron_right, color: Colors.grey),
         onTap: onTap,
       ),
@@ -828,7 +1267,11 @@ class BorrowForm extends StatefulWidget {
   final String itemName;
   final VoidCallback onConfirm;
 
-  const BorrowForm({super.key, required this.itemName, required this.onConfirm});
+  const BorrowForm({
+    super.key,
+    required this.itemName,
+    required this.onConfirm,
+  });
 
   @override
   State<BorrowForm> createState() => _BorrowFormState();
@@ -840,7 +1283,7 @@ class _BorrowFormState extends State<BorrowForm> {
   TextEditingController? _matkulController; // Diambil dari Autocomplete
   final _dosenController = TextEditingController();
   final _waktuController = TextEditingController();
-  final _namaAlatManualController = TextEditingController(); 
+  final _namaAlatManualController = TextEditingController();
 
   String? _errorMessage; // <-- Tambahan State untuk Notifikasi Dalam Form
 
@@ -848,47 +1291,203 @@ class _BorrowFormState extends State<BorrowForm> {
 
   // Dataset Mata Kuliah sesuai instruksi
   final List<CourseData> _courseList = [
-    CourseData("Interaksi Manusia dan Komputer (A)", "Dr. FAISAL, S.T., M.T", "08:00-09:40"),
-    CourseData("Interaksi Manusia dan Komputer (B)", "Dr. FAISAL, S.T., M.T", "10:00-11:40"),
-    CourseData("Interaksi Manusia dan Komputer (C)", "Ahmad Anshari, M.Kom", "13:00-14:40"),
-    CourseData("Interaksi Manusia dan Komputer (D)", "Ahmad Anshari, M.Kom", "15:00-16:40"),
-    CourseData("Interaksi Manusia dan Komputer (E)", "Dr. FAISAL, S.T., M.T", "08:00-09:40"),
-    CourseData("Jaringan Komputer (A)*", "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T", "10:00-12:30"),
-    CourseData("Jaringan Komputer (B)*", "MUNIARDI, S.Kom., M.Kom", "13:00-15:30"),
-    CourseData("Jaringan Komputer (C)*", "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T", "08:00-10:30"),
-    CourseData("Jaringan Komputer (D)*", "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T", "10:40-13:10"),
-    CourseData("Jaringan Komputer (E)*", "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T", "13:30-16:00"),
-    CourseData("Metodologi Penelitian Sains & Teknologi (A)", "FAISAL, S.Kom., M.Kom", "08:00-09:40"),
-    CourseData("Metodologi Penelitian Sains & Teknologi (B)", "M. Hasrul H, S.Kom, M.Kom", "10:00-11:40"),
-    CourseData("Metodologi Penelitian Sains & Teknologi (C)", "Ahmad Anshari, M.Kom", "13:00-14:40"),
-    CourseData("Metodologi Penelitian Sains & Teknologi (D)", "FAISAL, S.Kom., M.Kom", "15:00-16:40"),
-    CourseData("Metodologi Penelitian Sains & Teknologi (E)", "FAISAL, S.Kom., M.Kom", "08:00-09:40"),
-    CourseData("Pemrograman Perangkat Bergerak (A)*", "Ahmad Muyassar Ibrahim, S.Kom., M.Cs", "10:00-12:30"),
-    CourseData("Pemrograman Perangkat Bergerak (B)*", "Ahmad Muyassar Ibrahim, S.Kom., M.Cs", "13:00-15:30"),
-    CourseData("Pemrograman Perangkat Bergerak (C)*", "Ahmad Muyassar Ibrahim, S.Kom., M.Cs", "08:00-10:30"),
-    CourseData("Pemrograman Perangkat Bergerak (D)*", "ASEP INDRA SYAHYADI, S. Kom., M.Kom", "10:40-13:10"),
-    CourseData("Pemrograman Perangkat Bergerak (E)*", "Ahmad Muyassar Ibrahim, S.Kom., M.Cs", "13:30-16:00"),
-    CourseData("Pemrograman WEB 2 (A)*", "NUR SALMAN, S.Kom., M.T.", "08:00-10:30"),
-    CourseData("Pemrograman WEB 2 (B)*", "Ahmad Muyassar Ibrahim, S.Kom., M.Cs", "10:40-13:10"),
+    CourseData(
+      "Interaksi Manusia dan Komputer (A)",
+      "Dr. FAISAL, S.T., M.T",
+      "08:00-09:40",
+    ),
+    CourseData(
+      "Interaksi Manusia dan Komputer (B)",
+      "Dr. FAISAL, S.T., M.T",
+      "10:00-11:40",
+    ),
+    CourseData(
+      "Interaksi Manusia dan Komputer (C)",
+      "Ahmad Anshari, M.Kom",
+      "13:00-14:40",
+    ),
+    CourseData(
+      "Interaksi Manusia dan Komputer (D)",
+      "Ahmad Anshari, M.Kom",
+      "15:00-16:40",
+    ),
+    CourseData(
+      "Interaksi Manusia dan Komputer (E)",
+      "Dr. FAISAL, S.T., M.T",
+      "08:00-09:40",
+    ),
+    CourseData(
+      "Jaringan Komputer (A)*",
+      "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T",
+      "10:00-12:30",
+    ),
+    CourseData(
+      "Jaringan Komputer (B)*",
+      "MUNIARDI, S.Kom., M.Kom",
+      "13:00-15:30",
+    ),
+    CourseData(
+      "Jaringan Komputer (C)*",
+      "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Jaringan Komputer (D)*",
+      "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Jaringan Komputer (E)*",
+      "ANDI MUHAMMAD NUR HIDAYAT, S.Kom., M.T",
+      "13:30-16:00",
+    ),
+    CourseData(
+      "Metodologi Penelitian Sains & Teknologi (A)",
+      "FAISAL, S.Kom., M.Kom",
+      "08:00-09:40",
+    ),
+    CourseData(
+      "Metodologi Penelitian Sains & Teknologi (B)",
+      "M. Hasrul H, S.Kom, M.Kom",
+      "10:00-11:40",
+    ),
+    CourseData(
+      "Metodologi Penelitian Sains & Teknologi (C)",
+      "Ahmad Anshari, M.Kom",
+      "13:00-14:40",
+    ),
+    CourseData(
+      "Metodologi Penelitian Sains & Teknologi (D)",
+      "FAISAL, S.Kom., M.Kom",
+      "15:00-16:40",
+    ),
+    CourseData(
+      "Metodologi Penelitian Sains & Teknologi (E)",
+      "FAISAL, S.Kom., M.Kom",
+      "08:00-09:40",
+    ),
+    CourseData(
+      "Pemrograman Perangkat Bergerak (A)*",
+      "Ahmad Muyassar Ibrahim, S.Kom., M.Cs",
+      "10:00-12:30",
+    ),
+    CourseData(
+      "Pemrograman Perangkat Bergerak (B)*",
+      "Ahmad Muyassar Ibrahim, S.Kom., M.Cs",
+      "13:00-15:30",
+    ),
+    CourseData(
+      "Pemrograman Perangkat Bergerak (C)*",
+      "Ahmad Muyassar Ibrahim, S.Kom., M.Cs",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Pemrograman Perangkat Bergerak (D)*",
+      "ASEP INDRA SYAHYADI, S. Kom., M.Kom",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Pemrograman Perangkat Bergerak (E)*",
+      "Ahmad Muyassar Ibrahim, S.Kom., M.Cs",
+      "13:30-16:00",
+    ),
+    CourseData(
+      "Pemrograman WEB 2 (A)*",
+      "NUR SALMAN, S.Kom., M.T.",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Pemrograman WEB 2 (B)*",
+      "Ahmad Muyassar Ibrahim, S.Kom., M.Cs",
+      "10:40-13:10",
+    ),
     CourseData("Pemrograman WEB 2 (C)*", "NUR AFIF, S.T., M.T", "13:30-16:00"),
-    CourseData("Pemrograman WEB 2 (D)*", "NUR SALMAN, S.Kom., M.T.", "08:00-10:30"),
+    CourseData(
+      "Pemrograman WEB 2 (D)*",
+      "NUR SALMAN, S.Kom., M.T.",
+      "08:00-10:30",
+    ),
     CourseData("Pemrograman WEB 2 (E)*", "NUR AFIF, S.T., M.T", "10:40-13:10"),
-    CourseData("Rekayasa Perangkat Lunak (A)", "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.", "08:00-10:30"),
-    CourseData("Rekayasa Perangkat Lunak (B)", "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.", "10:40-13:10"),
-    CourseData("Rekayasa Perangkat Lunak (C)", "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.", "13:30-16:00"),
-    CourseData("Rekayasa Perangkat Lunak (D)", "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.", "08:00-10:30"),
-    CourseData("Rekayasa Perangkat Lunak (E)", "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.", "10:40-13:10"),
-    CourseData("Statistika dan Probabilitas (A)*", "Muhammad Ridwan, S.Si., M.Si.", "08:00-10:30"),
-    CourseData("Statistika dan Probabilitas (B)*", "Sri Dewi Anugrawati, S.Pd., M.Sc", "10:40-13:10"),
-    CourseData("Statistika dan Probabilitas (C)*", "Sri Dewi Anugrawati, S.Pd., M.Sc", "13:30-16:00"),
-    CourseData("Statistika dan Probabilitas (D)*", "Antamil, S.T., M.T.", "08:00-10:30"),
-    CourseData("Statistika dan Probabilitas (E)*", "Muhammad Ridwan, S.Si., M.Si.", "10:40-13:10"),
-    CourseData("Statistika dan Probabilitas (F)*", "Sri Dewi Anugrawati, S.Pd., M.Sc", "13:30-16:00"),
-    CourseData("Teori Bahasa dan Automata (A)", "Dr. Ir. A. Muhammad Syafar, S.T., M.T", "08:00-10:30"),
-    CourseData("Teori Bahasa dan Automata (B)", "MUSTIKASARI, S.Kom., M.Kom", "10:40-13:10"),
-    CourseData("Teori Bahasa dan Automata (C)", "MUSTIKASARI, S.Kom., M.Kom", "13:30-16:00"),
-    CourseData("Teori Bahasa dan Automata (D)", "Dr. Ir. A. Muhammad Syafar, S.T., M.T", "08:00-10:30"),
-    CourseData("Teori Bahasa dan Automata (E)", "Dr. Ir. A. Muhammad Syafar, S.T., M.T", "10:40-13:10"),
+    CourseData(
+      "Rekayasa Perangkat Lunak (A)",
+      "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Rekayasa Perangkat Lunak (B)",
+      "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Rekayasa Perangkat Lunak (C)",
+      "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.",
+      "13:30-16:00",
+    ),
+    CourseData(
+      "Rekayasa Perangkat Lunak (D)",
+      "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Rekayasa Perangkat Lunak (E)",
+      "Dr. RIDWAN ANDI KAMBAU, S.T., M.Kom.",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Statistika dan Probabilitas (A)*",
+      "Muhammad Ridwan, S.Si., M.Si.",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Statistika dan Probabilitas (B)*",
+      "Sri Dewi Anugrawati, S.Pd., M.Sc",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Statistika dan Probabilitas (C)*",
+      "Sri Dewi Anugrawati, S.Pd., M.Sc",
+      "13:30-16:00",
+    ),
+    CourseData(
+      "Statistika dan Probabilitas (D)*",
+      "Antamil, S.T., M.T.",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Statistika dan Probabilitas (E)*",
+      "Muhammad Ridwan, S.Si., M.Si.",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Statistika dan Probabilitas (F)*",
+      "Sri Dewi Anugrawati, S.Pd., M.Sc",
+      "13:30-16:00",
+    ),
+    CourseData(
+      "Teori Bahasa dan Automata (A)",
+      "Dr. Ir. A. Muhammad Syafar, S.T., M.T",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Teori Bahasa dan Automata (B)",
+      "MUSTIKASARI, S.Kom., M.Kom",
+      "10:40-13:10",
+    ),
+    CourseData(
+      "Teori Bahasa dan Automata (C)",
+      "MUSTIKASARI, S.Kom., M.Kom",
+      "13:30-16:00",
+    ),
+    CourseData(
+      "Teori Bahasa dan Automata (D)",
+      "Dr. Ir. A. Muhammad Syafar, S.T., M.T",
+      "08:00-10:30",
+    ),
+    CourseData(
+      "Teori Bahasa dan Automata (E)",
+      "Dr. Ir. A. Muhammad Syafar, S.T., M.T",
+      "10:40-13:10",
+    ),
     // Dummy Sistem Informasi jika mencari kata "Sistem"
     CourseData("Sistem Informasi (A)", "Dosen Sistem Informasi", "08:00-10:30"),
   ];
@@ -915,7 +1514,12 @@ class _BorrowFormState extends State<BorrowForm> {
     String alatManual = _namaAlatManualController.text.trim();
 
     // 1. Lengkapi semua data (Peringatan Merah)
-    if (nama.isEmpty || nim.isEmpty || matkul.isEmpty || dosen.isEmpty || waktu.isEmpty || (_isManualAdd && alatManual.isEmpty)) {
+    if (nama.isEmpty ||
+        nim.isEmpty ||
+        matkul.isEmpty ||
+        dosen.isEmpty ||
+        waktu.isEmpty ||
+        (_isManualAdd && alatManual.isEmpty)) {
       _showError("Lengkapi data peminjaman anda!!!");
       return;
     }
@@ -951,14 +1555,25 @@ class _BorrowFormState extends State<BorrowForm> {
       ),
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-        left: 24, right: 24, top: 16,
+        left: 24,
+        right: 24,
+        top: 16,
       ),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(10)))),
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade400,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -968,18 +1583,35 @@ class _BorrowFormState extends State<BorrowForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _isManualAdd ? "Pinjam Alat Lainnya" : "Formulir Peminjaman",
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: getTextColor(context)),
+                        _isManualAdd
+                            ? "Pinjam Alat Lainnya"
+                            : "Formulir Peminjaman",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: getTextColor(context),
+                        ),
                       ),
-                      Text("Harap lengkapi data berikut.", style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
+                      Text(
+                        "Harap lengkapi data berikut.",
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 14,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.close, color: Colors.grey),
                   onPressed: () => Navigator.pop(context),
-                  style: IconButton.styleFrom(backgroundColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
-                )
+                  style: IconButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade200,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 24),
@@ -1001,7 +1633,11 @@ class _BorrowFormState extends State<BorrowForm> {
                     Expanded(
                       child: Text(
                         _errorMessage!,
-                        style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 13),
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ],
@@ -1010,49 +1646,90 @@ class _BorrowFormState extends State<BorrowForm> {
 
             if (_isManualAdd) ...[
               _buildInputLabel(context, "Nama Alat"),
-              _buildTextField(context, _namaAlatManualController, "Masukkan nama alat", Icons.build_outlined),
+              _buildTextField(
+                context,
+                _namaAlatManualController,
+                "Masukkan nama alat",
+                Icons.build_outlined,
+              ),
               const SizedBox(height: 16),
             ],
-            
+
             _buildInputLabel(context, "Nama Lengkap"),
-            _buildTextField(context, _namaController, "Masukkan nama lengkap", Icons.person_outline),
+            _buildTextField(
+              context,
+              _namaController,
+              "Masukkan nama lengkap",
+              Icons.person_outline,
+            ),
             const SizedBox(height: 16),
-            
+
             _buildInputLabel(context, "NIM"),
-            _buildTextField(context, _nimController, "Masukkan Nomor Induk Mahasiswa", Icons.badge_outlined, isNumeric: true),
+            _buildTextField(
+              context,
+              _nimController,
+              "Masukkan Nomor Induk Mahasiswa",
+              Icons.badge_outlined,
+              isNumeric: true,
+            ),
             const SizedBox(height: 16),
-            
+
             _buildInputLabel(context, "Mata Kuliah/Praktikum"),
             _buildCourseAutocomplete(context),
             const SizedBox(height: 16),
-            
+
             _buildInputLabel(context, "Nama Dosen/Asisten Dosen"),
-            _buildTextField(context, _dosenController, "Otomatis terisi dari mata kuliah", Icons.school_outlined),
+            _buildTextField(
+              context,
+              _dosenController,
+              "Otomatis terisi dari mata kuliah",
+              Icons.school_outlined,
+            ),
             const SizedBox(height: 16),
-            
+
             _buildInputLabel(context, "Waktu/Jadwal"),
-            _buildTextField(context, _waktuController, "Otomatis terisi (ex: 08:00-09:40)", Icons.schedule),
+            _buildTextField(
+              context,
+              _waktuController,
+              "Otomatis terisi (ex: 08:00-09:40)",
+              Icons.schedule,
+            ),
             const SizedBox(height: 24),
-            
+
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.orange.shade50,
                 borderRadius: BorderRadius.circular(8),
-                border: const Border(left: BorderSide(color: Colors.orange, width: 4)),
+                border: const Border(
+                  left: BorderSide(color: Colors.orange, width: 4),
+                ),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 24),
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: Colors.orange,
+                    size: 24,
+                  ),
                   SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Perhatian Limit Waktu", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.orange)),
+                        Text(
+                          "Perhatian Limit Waktu",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.orange,
+                          ),
+                        ),
                         SizedBox(height: 4),
-                        Text("Batas waktu peminjaman alat untuk sesi ini adalah 35 menit. Keterlambatan akan dicatat dalam sistem.", style: TextStyle(fontSize: 12, color: Colors.black87)),
+                        Text(
+                          "Batas waktu peminjaman alat untuk sesi ini adalah 35 menit. Keterlambatan akan dicatat dalam sistem.",
+                          style: TextStyle(fontSize: 12, color: Colors.black87),
+                        ),
                       ],
                     ),
                   ),
@@ -1060,21 +1737,29 @@ class _BorrowFormState extends State<BorrowForm> {
               ),
             ),
             const SizedBox(height: 32),
-            
+
             SizedBox(
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
-                onPressed: _validateAndSubmit, 
+                onPressed: _validateAndSubmit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryGreen,
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text("Konfirmasi Pinjaman", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text(
+                      "Konfirmasi Pinjaman",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(width: 8),
                     Icon(Icons.arrow_forward),
                   ],
@@ -1090,11 +1775,24 @@ class _BorrowFormState extends State<BorrowForm> {
   Widget _buildInputLabel(BuildContext context, String label) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6.0),
-      child: Text(label, style: TextStyle(fontWeight: FontWeight.w600, color: getTextColor(context), fontSize: 13)),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: getTextColor(context),
+          fontSize: 13,
+        ),
+      ),
     );
   }
 
-  Widget _buildTextField(BuildContext context, TextEditingController controller, String hint, IconData icon, {bool isNumeric = false}) {
+  Widget _buildTextField(
+    BuildContext context,
+    TextEditingController controller,
+    String hint,
+    IconData icon, {
+    bool isNumeric = false,
+  }) {
     return TextField(
       controller: controller,
       style: TextStyle(color: getTextColor(context)),
@@ -1112,7 +1810,11 @@ class _BorrowFormState extends State<BorrowForm> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300),
+          borderSide: BorderSide(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey.shade800
+                : Colors.grey.shade300,
+          ),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -1130,7 +1832,9 @@ class _BorrowFormState extends State<BorrowForm> {
           return const Iterable<CourseData>.empty();
         }
         return _courseList.where((CourseData option) {
-          return option.name.toLowerCase().contains(textEditingValue.text.toLowerCase());
+          return option.name.toLowerCase().contains(
+            textEditingValue.text.toLowerCase(),
+          );
         });
       },
       displayStringForOption: (CourseData option) => option.name,
@@ -1138,34 +1842,48 @@ class _BorrowFormState extends State<BorrowForm> {
         _dosenController.text = selection.lecturer;
         _waktuController.text = selection.schedule;
       },
-      fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
-        _matkulController = textEditingController; 
-        return TextField(
-          controller: textEditingController,
-          focusNode: focusNode,
-          style: TextStyle(color: getTextColor(context)),
-          decoration: InputDecoration(
-            hintText: "Cari mata kuliah (ex: sistem atau jaringan)",
-            hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-            prefixIcon: const Icon(Icons.book_outlined, color: Colors.grey, size: 20),
-            filled: true,
-            fillColor: getCardColor(context),
-            contentPadding: const EdgeInsets.symmetric(vertical: 14),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: primaryGreen, width: 2),
-            ),
-          ),
-        );
-      },
+      fieldViewBuilder:
+          (
+            BuildContext context,
+            TextEditingController textEditingController,
+            FocusNode focusNode,
+            VoidCallback onFieldSubmitted,
+          ) {
+            _matkulController = textEditingController;
+            return TextField(
+              controller: textEditingController,
+              focusNode: focusNode,
+              style: TextStyle(color: getTextColor(context)),
+              decoration: InputDecoration(
+                hintText: "Cari mata kuliah (ex: sistem atau jaringan)",
+                hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                prefixIcon: const Icon(
+                  Icons.book_outlined,
+                  color: Colors.grey,
+                  size: 20,
+                ),
+                filled: true,
+                fillColor: getCardColor(context),
+                contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade300,
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color: primaryGreen, width: 2),
+                ),
+              ),
+            );
+          },
       optionsViewBuilder: (context, onSelected, options) {
         return Align(
           alignment: Alignment.topLeft,
@@ -1182,8 +1900,18 @@ class _BorrowFormState extends State<BorrowForm> {
                 itemBuilder: (BuildContext context, int index) {
                   final CourseData option = options.elementAt(index);
                   return ListTile(
-                    title: Text(option.name, style: TextStyle(color: getTextColor(context), fontSize: 13, fontWeight: FontWeight.bold)),
-                    subtitle: Text("${option.lecturer} | ${option.schedule}", style: const TextStyle(fontSize: 11, color: Colors.grey)),
+                    title: Text(
+                      option.name,
+                      style: TextStyle(
+                        color: getTextColor(context),
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      "${option.lecturer} | ${option.schedule}",
+                      style: const TextStyle(fontSize: 11, color: Colors.grey),
+                    ),
                     onTap: () {
                       onSelected(option);
                     },
@@ -1214,7 +1942,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text("Pengaturan", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Pengaturan",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: primaryGreen,
         foregroundColor: Colors.white,
       ),
@@ -1223,91 +1954,211 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("TAMPILAN", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12, letterSpacing: 1.2)),
+            const Text(
+              "TAMPILAN",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                letterSpacing: 1.2,
+              ),
+            ),
             const SizedBox(height: 12),
             Container(
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+                border: Border.all(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade800
+                      : Colors.grey.shade200,
+                ),
               ),
               child: ValueListenableBuilder<ThemeMode>(
                 valueListenable: themeNotifier,
                 builder: (context, currentMode, child) {
                   return ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     leading: CircleAvatar(
                       backgroundColor: getSurfaceColor(context),
-                      child: const Icon(Icons.dark_mode_outlined, color: primaryGreen),
+                      child: const Icon(
+                        Icons.dark_mode_outlined,
+                        color: primaryGreen,
+                      ),
                     ),
-                    title: Text("Dark Mode", style: TextStyle(fontWeight: FontWeight.w600, color: getTextColor(context))),
-                    subtitle: const Text("Gunakan tema gelap", style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    title: Text(
+                      "Dark Mode",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: getTextColor(context),
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "Gunakan tema gelap",
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
                     trailing: Switch(
                       value: currentMode == ThemeMode.dark,
                       activeColor: primaryGreen,
                       onChanged: (val) {
-                        themeNotifier.value = val ? ThemeMode.dark : ThemeMode.light;
+                        themeNotifier.value = val
+                            ? ThemeMode.dark
+                            : ThemeMode.light;
                       },
                     ),
                   );
-                }
+                },
               ),
             ),
             const SizedBox(height: 32),
-            
-            const Text("INFORMASI & BANTUAN", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12, letterSpacing: 1.2)),
+
+            const Text(
+              "INFORMASI & BANTUAN",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                letterSpacing: 1.2,
+              ),
+            ),
             const SizedBox(height: 12),
             Container(
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+                border: Border.all(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade800
+                      : Colors.grey.shade200,
+                ),
               ),
               child: Column(
                 children: [
-                  _buildSettingsMenuItem(context, Icons.info_outline, "Tentang Kami", null, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutUsScreen()));
-                  }),
-                  Divider(height: 1, indent: 16, endIndent: 16, color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
-                  _buildSettingsMenuItem(context, Icons.menu_book_outlined, "Panduan Penggunaan", null, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UserGuideScreen()));
-                  }),
-                  Divider(height: 1, indent: 16, endIndent: 16, color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
-                  _buildSettingsMenuItem(context, Icons.support_agent_outlined, "Hubungi Teknisi", "Bantuan teknis aplikasi", () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactTechScreen()));
-                  }),
+                  _buildSettingsMenuItem(
+                    context,
+                    Icons.info_outline,
+                    "Tentang Kami",
+                    null,
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AboutUsScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    height: 1,
+                    indent: 16,
+                    endIndent: 16,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade200,
+                  ),
+                  _buildSettingsMenuItem(
+                    context,
+                    Icons.menu_book_outlined,
+                    "Panduan Penggunaan",
+                    null,
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UserGuideScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    height: 1,
+                    indent: 16,
+                    endIndent: 16,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade200,
+                  ),
+                  _buildSettingsMenuItem(
+                    context,
+                    Icons.support_agent_outlined,
+                    "Hubungi Teknisi",
+                    "Bantuan teknis aplikasi",
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ContactTechScreen(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 48),
-            
+
             Center(
               child: OutlinedButton.icon(
-                onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false),
+                onPressed: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false,
+                ),
                 icon: const Icon(Icons.logout, color: Colors.red),
-                label: const Text("Keluar", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                label: const Text(
+                  "Keluar",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 16,
+                  ),
                   side: const BorderSide(color: Colors.red),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSettingsMenuItem(BuildContext context, IconData icon, String title, String? subtitle, VoidCallback onTap) {
+  Widget _buildSettingsMenuItem(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String? subtitle,
+    VoidCallback onTap,
+  ) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       leading: CircleAvatar(
         backgroundColor: getSurfaceColor(context),
         child: Icon(icon, color: primaryGreen),
       ),
-      title: Text(title, style: TextStyle(fontWeight: FontWeight.w600, color: getTextColor(context))),
-      subtitle: subtitle != null ? Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.grey)) : null,
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: getTextColor(context),
+        ),
+      ),
+      subtitle: subtitle != null
+          ? Text(
+              subtitle,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            )
+          : null,
       trailing: const Icon(Icons.chevron_right, color: Colors.grey),
       onTap: onTap,
     );
@@ -1322,7 +2173,10 @@ class AboutUsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text("Tentang Kami", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Tentang Kami",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.transparent,
         foregroundColor: primaryGreen,
         elevation: 0,
@@ -1334,27 +2188,54 @@ class AboutUsScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: getCardColor(context),
             borderRadius: BorderRadius.circular(24),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20)],
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20),
+            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text("Tentang SmartBorrow", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: primaryGreen)),
+              const Text(
+                "Tentang SmartBorrow",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: primaryGreen,
+                ),
+              ),
               const SizedBox(height: 12),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: getSurfaceColor(context),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300)
+                  border: Border.all(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade300,
+                  ),
                 ),
-                child: const Text("SmartBorrow Jurusan v1.0", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.grey)),
+                child: const Text(
+                  "SmartBorrow Jurusan v1.0",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
               const SizedBox(height: 32),
               Text(
                 "Aplikasi ini dikembangkan untuk mempermudah mahasiswa dalam meminjam alat inventaris jurusan secara digital, mengurangi penggunaan kertas, serta meminimalisir keterlambatan pengembalian menggunakan WhatsApp Bot.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: getTextColor(context), height: 1.5),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: getTextColor(context),
+                  height: 1.5,
+                ),
               ),
             ],
           ),
@@ -1372,7 +2253,10 @@ class UserGuideScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text("SmartBorrow", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "SmartBorrow",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: primaryGreen,
         elevation: 0,
@@ -1389,10 +2273,24 @@ class UserGuideScreen extends StatelessWidget {
                 color: primaryGreen.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text("Pusat Bantuan", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: primaryGreen)),
+              child: const Text(
+                "Pusat Bantuan",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: primaryGreen,
+                ),
+              ),
             ),
             const SizedBox(height: 16),
-            Text("Panduan Penggunaan", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: getTextColor(context))),
+            Text(
+              "Panduan Penggunaan",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: getTextColor(context),
+              ),
+            ),
             const SizedBox(height: 16),
             const Text(
               "Ikuti langkah-langkah di bawah ini untuk meminjam alat inventaris dengan mudah dan cepat melalui sistem akademik kami.",
@@ -1400,26 +2298,59 @@ class UserGuideScreen extends StatelessWidget {
               style: TextStyle(color: Colors.grey),
             ),
             const SizedBox(height: 32),
-            
-            _buildTimelineItem(context, Icons.search, "1. Cari Alat", "Cari alat yang Anda butuhkan di menu Inventory. Anda dapat memfilter berdasarkan kategori atau ketersediaan."),
-            _buildTimelineItem(context, Icons.edit_document, "2. Isi Formulir", "Klik tombol pinjam dan lengkapi data peminjaman Anda. Pastikan tujuan penggunaan dan durasi sesuai dengan kebutuhan praktikum atau kegiatan."),
-            _buildTimelineItem(context, Icons.pending_actions, "3. Tunggu Persetujuan", "Admin akan memverifikasi pengajuan Anda dalam waktu singkat. Anda akan menerima notifikasi setelah disetujui."),
-            _buildTimelineItem(context, Icons.pan_tool_alt, "4. Ambil & Gunakan", "Ambil alat di teknisi setelah mendapat persetujuan. Tunjukkan kode unik peminjaman Anda sebagai bukti."),
-            _buildTimelineItem(context, Icons.history_toggle_off, "5. Kembalikan Tepat Waktu", "Pastikan mengembalikan alat sesuai jadwal untuk menghindari denda administratif dan menjaga kepercayaan fasilitas institusi.", isLast: true),
+
+            _buildTimelineItem(
+              context,
+              Icons.search,
+              "1. Cari Alat",
+              "Cari alat yang Anda butuhkan di menu Inventory. Anda dapat memfilter berdasarkan kategori atau ketersediaan.",
+            ),
+            _buildTimelineItem(
+              context,
+              Icons.edit_document,
+              "2. Isi Formulir",
+              "Klik tombol pinjam dan lengkapi data peminjaman Anda. Pastikan tujuan penggunaan dan durasi sesuai dengan kebutuhan praktikum atau kegiatan.",
+            ),
+            _buildTimelineItem(
+              context,
+              Icons.pending_actions,
+              "3. Tunggu Persetujuan",
+              "Admin akan memverifikasi pengajuan Anda dalam waktu singkat. Anda akan menerima notifikasi setelah disetujui.",
+            ),
+            _buildTimelineItem(
+              context,
+              Icons.pan_tool_alt,
+              "4. Ambil & Gunakan",
+              "Ambil alat di teknisi setelah mendapat persetujuan. Tunjukkan kode unik peminjaman Anda sebagai bukti.",
+            ),
+            _buildTimelineItem(
+              context,
+              Icons.history_toggle_off,
+              "5. Kembalikan Tepat Waktu",
+              "Pastikan mengembalikan alat sesuai jadwal untuk menghindari denda administratif dan menjaga kepercayaan fasilitas institusi.",
+              isLast: true,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTimelineItem(BuildContext context, IconData icon, String title, String desc, {bool isLast = false}) {
+  Widget _buildTimelineItem(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String desc, {
+    bool isLast = false,
+  }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           children: [
             Container(
-              width: 40, height: 40,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: primaryGreen, width: 2),
@@ -1427,8 +2358,7 @@ class UserGuideScreen extends StatelessWidget {
               ),
               child: Icon(icon, color: primaryGreen, size: 20),
             ),
-            if (!isLast)
-              Container(width: 2, height: 80, color: primaryGreen),
+            if (!isLast) Container(width: 2, height: 80, color: primaryGreen),
           ],
         ),
         const SizedBox(width: 16),
@@ -1439,18 +2369,32 @@ class UserGuideScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: getCardColor(context),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+              border: Border.all(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey.shade800
+                    : Colors.grey.shade200,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: getTextColor(context))),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: getTextColor(context),
+                  ),
+                ),
                 const SizedBox(height: 8),
-                Text(desc, style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                Text(
+                  desc,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                ),
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -1464,7 +2408,10 @@ class ContactTechScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text("Layanan Teknis", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Layanan Teknis",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: primaryGreen,
         elevation: 0,
@@ -1479,23 +2426,38 @@ class ContactTechScreen extends StatelessWidget {
               style: TextStyle(color: Colors.grey, fontSize: 14, height: 1.5),
             ),
             const SizedBox(height: 32),
-            
+
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+                border: Border.all(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade800
+                      : Colors.grey.shade200,
+                ),
               ),
               child: Column(
                 children: [
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: getSurfaceColor(context),
-                    child: const Icon(Icons.chat_bubble_outline, color: primaryGreen, size: 28),
+                    child: const Icon(
+                      Icons.chat_bubble_outline,
+                      color: primaryGreen,
+                      size: 28,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  Text("Hubungi via WhatsApp", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: getTextColor(context))),
+                  Text(
+                    "Hubungi via WhatsApp",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: getTextColor(context),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   const Text(
                     "Dapatkan respon cepat untuk kendala teknis atau pertanyaan seputar penggunaan aplikasi melalui layanan WhatsApp kami.",
@@ -1511,11 +2473,16 @@ class ContactTechScreen extends StatelessWidget {
                         backgroundColor: primaryGreen,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      child: const Text("Mulai Chat", style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        "Mulai Chat",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -1526,17 +2493,32 @@ class ContactTechScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: getCardColor(context),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+                border: Border.all(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade800
+                      : Colors.grey.shade200,
+                ),
               ),
               child: Column(
                 children: [
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: getSurfaceColor(context),
-                    child: const Icon(Icons.email_outlined, color: primaryGreen, size: 28),
+                    child: const Icon(
+                      Icons.email_outlined,
+                      color: primaryGreen,
+                      size: 28,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  Text("Hubungi via Email", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: getTextColor(context))),
+                  Text(
+                    "Hubungi via Email",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: getTextColor(context),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   const Text(
                     "Kirimkan detail kendala atau lampiran dokumen terkait permasalahan Anda ke alamat email resmi kami.",
@@ -1549,12 +2531,15 @@ class ContactTechScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                       color: getSurfaceColor(context),
-                      borderRadius: BorderRadius.circular(8)
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Text(
                       "support@uin-alauddin.ac.id",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w600, color: primaryGreen),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: primaryGreen,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -1566,11 +2551,16 @@ class ContactTechScreen extends StatelessWidget {
                         side: const BorderSide(color: primaryGreen),
                         foregroundColor: primaryGreen,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      child: const Text("Kirim Email", style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        "Kirim Email",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -1613,7 +2603,13 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
       body: pages[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -5))],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
         ),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
@@ -1623,9 +2619,21 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
           backgroundColor: getCardColor(context),
           type: BottomNavigationBarType.fixed,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.inventory_2_outlined), activeIcon: Icon(Icons.inventory_2), label: 'Inventory'),
-            BottomNavigationBarItem(icon: Icon(Icons.assignment_outlined), activeIcon: Icon(Icons.assignment), label: 'Loans'),
-            BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: 'Profil'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.inventory_2_outlined),
+              activeIcon: Icon(Icons.inventory_2),
+              label: 'Inventory',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.assignment_outlined),
+              activeIcon: Icon(Icons.assignment),
+              label: 'Loans',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
+              label: 'Profil',
+            ),
           ],
         ),
       ),
@@ -1635,7 +2643,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
 
 class AdminDashboardScreen extends StatefulWidget {
   final VoidCallback onNavigateToLoans;
-  
+
   const AdminDashboardScreen({super.key, required this.onNavigateToLoans});
 
   @override
@@ -1660,18 +2668,32 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         title: Row(
           children: [
             Container(
-              width: 30, height: 30,
-              decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-              child: const Icon(Icons.account_balance, color: primaryGreen, size: 18),
+              width: 30,
+              height: 30,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: const Icon(
+                Icons.account_balance,
+                color: primaryGreen,
+                size: 18,
+              ),
             ),
             const SizedBox(width: 12),
-            const Text("SmartBorrow", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const Text(
+              "SmartBorrow",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
           ],
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings), 
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
+            icon: const Icon(Icons.settings),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
+            ),
           ),
         ],
       ),
@@ -1680,37 +2702,87 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Halo, Admin Jurusan!", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: primaryGreen)),
-            const Text("Kelola peminjaman inventaris jurusan hari ini.", style: TextStyle(fontSize: 13, color: Colors.grey)),
+            const Text(
+              "Halo, Admin Jurusan!",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: primaryGreen,
+              ),
+            ),
+            const Text(
+              "Kelola peminjaman inventaris jurusan hari ini.",
+              style: TextStyle(fontSize: 13, color: Colors.grey),
+            ),
             const SizedBox(height: 20),
-            
+
             // Summary Cards
-            _buildSummaryCard(context, "PEMINJAMAN AKTIF", "24", Icons.outbox, Colors.orange.shade100, Colors.orange),
+            _buildSummaryCard(
+              context,
+              "PEMINJAMAN AKTIF",
+              "24",
+              Icons.outbox,
+              Colors.orange.shade100,
+              Colors.orange,
+            ),
             const SizedBox(height: 12),
-            _buildSummaryCard(context, "MENUNGGU PERSETUJUAN", "7", Icons.pending_actions, Colors.red.shade100, Colors.red),
+            _buildSummaryCard(
+              context,
+              "MENUNGGU PERSETUJUAN",
+              "7",
+              Icons.pending_actions,
+              Colors.red.shade100,
+              Colors.red,
+            ),
             const SizedBox(height: 12),
-            _buildSummaryCard(context, "TERLAMBAT", "2", Icons.warning_amber, Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300, Colors.grey),
+            _buildSummaryCard(
+              context,
+              "TERLAMBAT",
+              "2",
+              Icons.warning_amber,
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey.shade800
+                  : Colors.grey.shade300,
+              Colors.grey,
+            ),
             const SizedBox(height: 24),
-            
+
             // Chips Filter
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: ['Menunggu (7)', 'Aktif (24)', 'Semua'].map((category) {
+                children: ['Menunggu (7)', 'Aktif (24)', 'Semua'].map((
+                  category,
+                ) {
                   String filterVal = category.split(' ')[0];
-                  bool isSelected = _selectedFilter == filterVal || (_selectedFilter == 'Semua' && category == 'Semua');
+                  bool isSelected =
+                      _selectedFilter == filterVal ||
+                      (_selectedFilter == 'Semua' && category == 'Semua');
                   return Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: ChoiceChip(
                       label: Text(category),
                       selected: isSelected,
-                      onSelected: (selected) => setState(() => _selectedFilter = category == 'Semua' ? 'Semua' : filterVal),
+                      onSelected: (selected) => setState(
+                        () => _selectedFilter = category == 'Semua'
+                            ? 'Semua'
+                            : filterVal,
+                      ),
                       selectedColor: primaryGreen,
                       backgroundColor: getCardColor(context),
-                      labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.grey.shade700, fontWeight: FontWeight.w600),
+                      labelStyle: TextStyle(
+                        color: isSelected ? Colors.white : Colors.grey.shade700,
+                        fontWeight: FontWeight.w600,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: isSelected ? primaryGreen : (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300)),
+                        side: BorderSide(
+                          color: isSelected
+                              ? primaryGreen
+                              : (Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey.shade800
+                                    : Colors.grey.shade300),
+                        ),
                       ),
                       showCheckmark: false,
                     ),
@@ -1719,7 +2791,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            
+
             // Admin Loan Cards
             ListView.builder(
               shrinkWrap: true,
@@ -1735,13 +2807,24 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     );
   }
 
-  Widget _buildSummaryCard(BuildContext context, String title, String count, IconData icon, Color bgColor, Color iconColor) {
+  Widget _buildSummaryCard(
+    BuildContext context,
+    String title,
+    String count,
+    IconData icon,
+    Color bgColor,
+    Color iconColor,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: getCardColor(context),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade800
+              : Colors.grey.shade200,
+        ),
       ),
       child: Row(
         children: [
@@ -1755,12 +2838,26 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.bold)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(count, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: getTextColor(context))),
+                Text(
+                  count,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: getTextColor(context),
+                  ),
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -1772,7 +2869,11 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       decoration: BoxDecoration(
         color: getCardColor(context),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
+        border: Border.all(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade800
+              : Colors.grey.shade200,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1780,20 +2881,37 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           Stack(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                child: Image.asset(loan.imageUrl, height: 160, width: double.infinity, fit: BoxFit.cover),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: Image.asset(
+                  loan.imageUrl,
+                  height: 160,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
               Positioned(
-                top: 12, left: 12,
+                top: 12,
+                left: 12,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
-                    color: loan.status == 'Menunggu' ? Colors.red.shade700 : primaryGreen,
+                    color: loan.status == 'Menunggu'
+                        ? Colors.red.shade700
+                        : primaryGreen,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     loan.status,
-                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -1806,32 +2924,74 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               children: [
                 Row(
                   children: [
-                    Expanded(child: Text(loan.itemName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: getTextColor(context)))),
+                    Expanded(
+                      child: Text(
+                        loan.itemName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: getTextColor(context),
+                        ),
+                      ),
+                    ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(color: getSurfaceColor(context), borderRadius: BorderRadius.circular(8)),
-                      child: const Text("INV-xxx", style: TextStyle(fontSize: 12, color: Colors.grey)),
-                    )
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: getSurfaceColor(context),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text(
+                        "INV-xxx",
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    const Icon(Icons.person_outline, size: 16, color: Colors.grey),
+                    const Icon(
+                      Icons.person_outline,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
                     const SizedBox(width: 8),
-                    Text("${loan.userName} (${loan.nim})", style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black87)),
+                    Text(
+                      "${loan.userName} (${loan.nim})",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white70
+                            : Colors.black87,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.calendar_today_outlined, size: 16, color: Colors.grey),
+                    const Icon(
+                      Icons.calendar_today_outlined,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
                     const SizedBox(width: 8),
-                    Text("${loan.date}, ${loan.time}", style: TextStyle(fontSize: 13, color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black87)),
+                    Text(
+                      "${loan.date}, ${loan.time}",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white70
+                            : Colors.black87,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Setujui, Info, Tolak Buttons
                 Row(
                   children: [
@@ -1840,15 +3000,24 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                         child: ElevatedButton.icon(
                           onPressed: () {
                             setState(() => loan.status = 'Aktif');
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman disetujui")));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Pinjaman disetujui"),
+                              ),
+                            );
                           },
-                          icon: const Icon(Icons.check_circle_outline, size: 16),
+                          icon: const Icon(
+                            Icons.check_circle_outline,
+                            size: 16,
+                          ),
                           label: const Text("Setujui"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: primaryGreen,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                       ),
@@ -1862,8 +3031,15 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.grey,
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          side: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade700 : Colors.grey.shade300),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          side: BorderSide(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey.shade700
+                                : Colors.grey.shade300,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
                     ),
@@ -1880,36 +3056,42 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             foregroundColor: Colors.red,
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             side: const BorderSide(color: Colors.red),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                       ),
-                    ]
+                    ],
                   ],
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
-  
+
   void _showLoanDetail(BuildContext context, LoanData loan, bool isAdmin) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => LoanDetailSheet(
-        loan: loan, 
+        loan: loan,
         isAdmin: isAdmin,
         onAction: (action) {
           if (action == 'Setujui') {
             setState(() => loan.status = 'Aktif');
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman disetujui")));
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text("Pinjaman disetujui")));
           } else if (action == 'Tolak') {
             setState(() => dummyLoans.remove(loan));
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman ditolak")));
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text("Pinjaman ditolak")));
           }
         },
       ),
@@ -1927,17 +3109,34 @@ class LoansScreen extends StatefulWidget {
 
 class _LoansScreenState extends State<LoansScreen> {
   String _selectedFilter = 'Semua Riwayat';
+  String _searchQuery =
+      ''; // <-- 1. Tambahan state untuk menyimpan teks pencarian
 
   @override
   Widget build(BuildContext context) {
-    List<LoanData> displayLoans = widget.isAdmin ? dummyLoans : dummyLoans.where((l) => l.nim == '60200119032').toList();
-    
+    List<LoanData> displayLoans = widget.isAdmin
+        ? dummyLoans
+        : dummyLoans.where((l) => l.nim == '60200119032').toList();
+
+    // 2. Logika filter diperbarui untuk mencocokkan pencarian barang
     List<LoanData> filteredLoans = displayLoans.where((l) {
-      if (_selectedFilter == 'Semua Riwayat') return true;
-      if (_selectedFilter == 'Sedang Dipinjam') return l.status == 'Aktif' || l.status == 'Menunggu';
-      if (_selectedFilter == 'Terlambat') return l.status == 'Terlambat';
-      if (_selectedFilter == 'Selesai') return l.status == 'Selesai';
-      return true;
+      // Filter berdasarkan kategori Chip
+      bool matchesCategory = true;
+      if (_selectedFilter == 'Semua Riwayat')
+        matchesCategory = true;
+      else if (_selectedFilter == 'Sedang Dipinjam')
+        matchesCategory = l.status == 'Aktif' || l.status == 'Menunggu';
+      else if (_selectedFilter == 'Terlambat')
+        matchesCategory = l.status == 'Terlambat';
+      else if (_selectedFilter == 'Selesai')
+        matchesCategory = l.status == 'Selesai';
+
+      // Filter berdasarkan teks pencarian
+      bool matchesSearch = l.itemName.toLowerCase().contains(
+        _searchQuery.toLowerCase(),
+      );
+
+      return matchesCategory && matchesSearch;
     }).toList();
 
     return Scaffold(
@@ -1946,10 +3145,17 @@ class _LoansScreenState extends State<LoansScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: primaryGreen,
         elevation: 0,
-        title: const Text("Riwayat Peminjaman", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Riwayat Peminjaman",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
-          IconButton(icon: const Icon(Icons.settings), 
-          onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
+            ),
           ),
         ],
       ),
@@ -1958,6 +3164,12 @@ class _LoansScreenState extends State<LoansScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
+              // 3. Menambahkan fungsi onChanged untuk menangkap ketikan keyboard
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value;
+                });
+              },
               style: TextStyle(color: getTextColor(context)),
               decoration: InputDecoration(
                 hintText: "Cari barang...",
@@ -1965,7 +3177,14 @@ class _LoansScreenState extends State<LoansScreen> {
                 filled: true,
                 fillColor: getCardColor(context),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.transparent)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.transparent,
+                  ),
+                ),
               ),
             ),
           ),
@@ -1974,25 +3193,44 @@ class _LoansScreenState extends State<LoansScreen> {
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
-              children: ['Semua Riwayat', 'Sedang Dipinjam', 'Terlambat', 'Selesai'].map((category) {
-                bool isSelected = _selectedFilter == category;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ChoiceChip(
-                    label: Text(category),
-                    selected: isSelected,
-                    onSelected: (selected) => setState(() => _selectedFilter = category),
-                    selectedColor: primaryGreen,
-                    backgroundColor: getCardColor(context),
-                    labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.grey.shade700, fontWeight: FontWeight.w600),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: isSelected ? primaryGreen : (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300)),
-                    ),
-                    showCheckmark: false,
-                  ),
-                );
-              }).toList(),
+              children:
+                  [
+                    'Semua Riwayat',
+                    'Sedang Dipinjam',
+                    'Terlambat',
+                    'Selesai',
+                  ].map((category) {
+                    bool isSelected = _selectedFilter == category;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: ChoiceChip(
+                        label: Text(category),
+                        selected: isSelected,
+                        onSelected: (selected) =>
+                            setState(() => _selectedFilter = category),
+                        selectedColor: primaryGreen,
+                        backgroundColor: getCardColor(context),
+                        labelStyle: TextStyle(
+                          color: isSelected
+                              ? Colors.white
+                              : Colors.grey.shade700,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(
+                            color: isSelected
+                                ? primaryGreen
+                                : (Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey.shade800
+                                      : Colors.grey.shade300),
+                          ),
+                        ),
+                        showCheckmark: false,
+                      ),
+                    );
+                  }).toList(),
             ),
           ),
           const SizedBox(height: 16),
@@ -2004,7 +3242,7 @@ class _LoansScreenState extends State<LoansScreen> {
                 return _buildHistoryCard(context, filteredLoans[index]);
               },
             ),
-          )
+          ),
         ],
       ),
     );
@@ -2013,13 +3251,22 @@ class _LoansScreenState extends State<LoansScreen> {
   Widget _buildHistoryCard(BuildContext context, LoanData loan) {
     Color statusColor;
     Color statusBg;
-    if (loan.status == 'Selesai') { statusColor = Colors.green; statusBg = Colors.green.shade50; }
-    else if (loan.status == 'Terlambat') { statusColor = Colors.red; statusBg = Colors.red.shade50; }
-    else if (loan.status == 'Aktif') { statusColor = Colors.orange; statusBg = Colors.orange.shade50; }
-    else { statusColor = primaryGreen; statusBg = primaryGreen.withValues(alpha: 0.1); }
+    if (loan.status == 'Selesai') {
+      statusColor = Colors.green;
+      statusBg = Colors.green.shade50;
+    } else if (loan.status == 'Terlambat') {
+      statusColor = Colors.red;
+      statusBg = Colors.red.shade50;
+    } else if (loan.status == 'Aktif') {
+      statusColor = Colors.orange;
+      statusBg = Colors.orange.shade50;
+    } else {
+      statusColor = primaryGreen;
+      statusBg = primaryGreen.withValues(alpha: 0.1);
+    }
 
     if (Theme.of(context).brightness == Brightness.dark) {
-      statusBg = statusColor.withValues(alpha: 0.2); 
+      statusBg = statusColor.withValues(alpha: 0.2);
     }
 
     return Container(
@@ -2027,7 +3274,13 @@ class _LoansScreenState extends State<LoansScreen> {
       decoration: BoxDecoration(
         color: getCardColor(context),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: loan.status == 'Terlambat' ? Colors.red.shade300 : (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200)),
+        border: Border.all(
+          color: loan.status == 'Terlambat'
+              ? Colors.red.shade300
+              : (Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey.shade800
+                    : Colors.grey.shade200),
+        ),
       ),
       child: Column(
         children: [
@@ -2038,7 +3291,12 @@ class _LoansScreenState extends State<LoansScreen> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(loan.imageUrl, width: 80, height: 80, fit: BoxFit.cover),
+                  child: Image.asset(
+                    loan.imageUrl,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -2049,26 +3307,64 @@ class _LoansScreenState extends State<LoansScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(color: statusBg, borderRadius: BorderRadius.circular(8)),
-                            child: Text(loan.status == 'Aktif' ? 'Sedang Dipinjam' : loan.status, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: statusColor)),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: statusBg,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              loan.status == 'Aktif'
+                                  ? 'Sedang Dipinjam'
+                                  : loan.status,
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: statusColor,
+                              ),
+                            ),
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.calendar_today, size: 12, color: Colors.grey),
+                              const Icon(
+                                Icons.calendar_today,
+                                size: 12,
+                                color: Colors.grey,
+                              ),
                               const SizedBox(width: 4),
-                              Text(loan.date.substring(0, 6), style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                              Text(
+                                loan.date.substring(0, 6),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                       const SizedBox(height: 8),
-                      Text(loan.itemName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: getTextColor(context))),
+                      Text(
+                        loan.itemName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: getTextColor(context),
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text("${loan.userName} (${loan.nim})", style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                      Text(
+                        "${loan.userName} (${loan.nim})",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -2076,16 +3372,38 @@ class _LoansScreenState extends State<LoansScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: getSurfaceColor(context),
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(16),
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Icon(loan.status == 'Terlambat' ? Icons.warning_amber : Icons.access_time, size: 16, color: loan.status == 'Terlambat' ? Colors.red : (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black87)),
+                    Icon(
+                      loan.status == 'Terlambat'
+                          ? Icons.warning_amber
+                          : Icons.access_time,
+                      size: 16,
+                      color: loan.status == 'Terlambat'
+                          ? Colors.red
+                          : (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white70
+                                : Colors.black87),
+                    ),
                     const SizedBox(width: 8),
-                    Text(loan.time, style: TextStyle(fontSize: 13, color: loan.status == 'Terlambat' ? Colors.red : (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black87))),
+                    Text(
+                      loan.time,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: loan.status == 'Terlambat'
+                            ? Colors.red
+                            : (Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white70
+                                  : Colors.black87),
+                      ),
+                    ),
                   ],
                 ),
                 InkWell(
@@ -2095,30 +3413,42 @@ class _LoansScreenState extends State<LoansScreen> {
                       isScrollControlled: true,
                       backgroundColor: Colors.transparent,
                       builder: (context) => LoanDetailSheet(
-                        loan: loan, 
+                        loan: loan,
                         isAdmin: widget.isAdmin,
                         onAction: (action) {
                           if (action == 'Setujui') {
                             setState(() => loan.status = 'Aktif');
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman disetujui")));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Pinjaman disetujui"),
+                              ),
+                            );
                           } else if (action == 'Tolak') {
                             setState(() => dummyLoans.remove(loan));
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Pinjaman ditolak")));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Pinjaman ditolak")),
+                            );
                           }
-                        }
+                        },
                       ),
                     );
                   },
                   child: Row(
                     children: const [
-                      Text("Info", style: TextStyle(fontWeight: FontWeight.bold, color: primaryGreen)),
+                      Text(
+                        "Info",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: primaryGreen,
+                        ),
+                      ),
                       Icon(Icons.arrow_forward, size: 16, color: primaryGreen),
                     ],
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -2129,8 +3459,13 @@ class LoanDetailSheet extends StatelessWidget {
   final LoanData loan;
   final bool isAdmin;
   final Function(String)? onAction;
-  
-  const LoanDetailSheet({super.key, required this.loan, required this.isAdmin, this.onAction});
+
+  const LoanDetailSheet({
+    super.key,
+    required this.loan,
+    required this.isAdmin,
+    this.onAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -2139,36 +3474,73 @@ class LoanDetailSheet extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
       ),
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + 24, left: 24, right: 24, top: 16),
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).padding.bottom + 24,
+        left: 24,
+        right: 24,
+        top: 16,
+      ),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(10)))),
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade400,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Detail Peminjaman", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: getTextColor(context))),
+                Text(
+                  "Detail Peminjaman",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: getTextColor(context),
+                  ),
+                ),
                 IconButton(
                   icon: const Icon(Icons.close, color: Colors.grey),
                   onPressed: () => Navigator.pop(context),
-                  style: IconButton.styleFrom(backgroundColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200),
-                )
+                  style: IconButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade200,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Card Nama Barang
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(color: getCardColor(context), borderRadius: BorderRadius.circular(16), border: Border.all(color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade200)),
+              decoration: BoxDecoration(
+                color: getCardColor(context),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade800
+                      : Colors.grey.shade200,
+                ),
+              ),
               child: Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(color: getSurfaceColor(context), borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(
+                      color: getSurfaceColor(context),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: const Icon(Icons.devices, color: primaryGreen),
                   ),
                   const SizedBox(width: 16),
@@ -2176,29 +3548,43 @@ class LoanDetailSheet extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Nama Barang", style: TextStyle(fontSize: 12, color: Colors.grey)),
-                        Text(loan.itemName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: getTextColor(context))),
+                        const Text(
+                          "Nama Barang",
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        Text(
+                          loan.itemName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: getTextColor(context),
+                          ),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            
+
             _buildSectionTitle("INFORMASI PEMINJAM"),
             _buildDetailRow(context, "Nama", loan.userName, "NIM", loan.nim),
-            
+
             const SizedBox(height: 16),
             _buildSectionTitle("INFORMASI AKADEMIK"),
             _buildDetailSingleRow(context, "Mata Kuliah", loan.matkul),
             _buildDetailSingleRow(context, "Dosen Pengampu", loan.dosen),
-            
+
             const SizedBox(height: 16),
             _buildSectionTitle("JADWAL & WAKTU"),
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(color: primaryGreen.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12), border: Border.all(color: primaryGreen.withValues(alpha: 0.2))),
+              decoration: BoxDecoration(
+                color: primaryGreen.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: primaryGreen.withValues(alpha: 0.2)),
+              ),
               child: Row(
                 children: [
                   const Icon(Icons.access_time, color: primaryGreen),
@@ -2206,14 +3592,29 @@ class LoanDetailSheet extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(loan.date, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: getTextColor(context))),
-                      Text(loan.time, style: TextStyle(fontSize: 12, color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black87)),
+                      Text(
+                        loan.date,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: getTextColor(context),
+                        ),
+                      ),
+                      Text(
+                        loan.time,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white70
+                              : Colors.black87,
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-            
+
             if (isAdmin && loan.status == 'Menunggu') ...[
               const SizedBox(height: 32),
               Row(
@@ -2228,9 +3629,14 @@ class LoanDetailSheet extends StatelessWidget {
                         foregroundColor: Colors.brown.shade700,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         side: BorderSide(color: Colors.brown.shade300),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      child: const Text("Tolak", style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        "Tolak",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -2244,14 +3650,19 @@ class LoanDetailSheet extends StatelessWidget {
                         backgroundColor: primaryGreen,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      child: const Text("Setujui", style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: const Text(
+                        "Setujui",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ],
-              )
-            ]
+              ),
+            ],
           ],
         ),
       ),
@@ -2262,23 +3673,71 @@ class LoanDetailSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Row(
-        children: [ 
+        children: [
           const Icon(Icons.description_outlined, size: 16, color: primaryGreen),
           const SizedBox(width: 8),
-          Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: primaryGreen, letterSpacing: 1.1)),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: primaryGreen,
+              letterSpacing: 1.1,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildDetailRow(BuildContext context, String label1, String val1, String label2, String val2) {
+  Widget _buildDetailRow(
+    BuildContext context,
+    String label1,
+    String val1,
+    String label2,
+    String val2,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(label1, style: const TextStyle(fontSize: 12, color: Colors.grey)), Text(val1, style: TextStyle(fontWeight: FontWeight.w500, color: getTextColor(context)))])),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(label2, style: const TextStyle(fontSize: 12, color: Colors.grey)), Text(val2, style: TextStyle(fontWeight: FontWeight.w500, color: getTextColor(context)))])),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label1,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                Text(
+                  val1,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: getTextColor(context),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label2,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                Text(
+                  val2,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: getTextColor(context),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -2291,7 +3750,13 @@ class LoanDetailSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-          Text(val, style: TextStyle(fontWeight: FontWeight.w500, color: getTextColor(context))),
+          Text(
+            val,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              color: getTextColor(context),
+            ),
+          ),
         ],
       ),
     );
